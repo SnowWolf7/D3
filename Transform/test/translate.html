@@ -1,0 +1,38 @@
+<!--测试D3、CSS、SVG的transform-->
+<!--利用svg中矩形和普通HTML元素div做transform测试。-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Translate</title>
+    <style>
+        svg
+        {
+            border:2px solid red;
+        }
+        div
+        {
+            position: absolute;
+            left: 30px;
+            top: 30px;
+            width: 100px;
+            height: 60px;
+            background-color: blue;
+            -webkit-transform: translate(200px,100px);
+            -moz-transform: translate(200px,100px);
+            -ms-transform: translate(200px,100px);
+            -o-transform: translate(200px,100px);
+            transform: translate(200px,100px);
+        }
+    </style>
+</head>
+<body>
+<!--svg和csstranslate变换实质上是相同的，每次变换都会创建一个新的坐标系，实质是新的坐标系对原来坐标系基础上的位移-->
+<!--svg和css变换的区别是两元素的坐标原点不同，一个在元素中心，一个在用户坐标系原点（默认左上角)-->
+<div></div>
+<svg style="height: 500px;width: 800px;">
+    <rect x="20" y="20" height="60" width="100" transform="translate(200,100)" style="fill: blue"></rect>
+    <rect x="20" y="20" height="60" width="100"></rect>
+</svg>
+</body>
+</html>

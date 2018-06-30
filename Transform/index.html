@@ -1,0 +1,56 @@
+<!--测试D3、CSS、SVG的transform-->
+<!--
+   svg的transform官方文档：https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/transform
+   CSS的transform官方文档：http://www.w3school.com.cn/css3/css3_2dtransform.asp
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Transform</title>
+    <style>
+        svg
+        {
+            border: #ff1515 2px solid;
+        }
+        #rect0
+        {
+            -webkit-transform: rotate(10deg);
+            -moz-transform: rotate(10deg);
+            -ms-transform: rotate(10deg);
+            -o-transform: rotate(10deg);
+            transform: rotate(20deg);
+        }
+        #rect1
+        {
+            -webkit-transform: translate(120px,100px);
+            -moz-transform: translate(120px,100px);
+            -ms-transform: translate(120px,100px);
+            -o-transform: translate(120px,100px);
+            transform: translate(120px,100px);
+        }
+        div
+        {
+            position: absolute;
+            left:30px;
+            top:30px;
+            height: 60px;
+            width:100px;
+            opacity: 0.7;
+            background-color: blue;
+            -webkit-transform: rotate(20deg);
+            -moz-transform: rotate(20deg);
+            -ms-transform: rotate(20deg);
+            -o-transform: rotate(20deg);
+            transform: rotate(20deg);
+        }
+    </style>
+</head>
+<body>
+<svg style="height: 500px; width: 800px;">
+    <rect x="20" y="20" height="60" width="100"></rect>
+</svg>
+<div></div>
+</body>
+</html>

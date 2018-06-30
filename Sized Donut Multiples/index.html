@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Sized Donut Multiples</title>
+</head>
+<style>
+    body {
+        font: 10px sans-serif;
+    }
+
+    svg {
+        padding: 10px 0 0 10px;
+    }
+
+    .legend {
+        vertical-align: top;
+    }
+
+    .label {
+        text-anchor: middle;
+    }
+
+    .label-name {
+        font-weight: bold;
+    }
+
+</style>
+<body>
+
+    <script src="js/d3.min.js"></script>
+    <script>
+    /*
+        数据：csv数据，1+7个keys。
+        可视化方案：对于条记录，使用pie图展示。
+        思路：1、d3.csv()解析数据，并使用function(d, i, columns) 转换数据行。
+             2、对处理好的数据进行图例绘制，利用selection.each()绘制每一个pie图。
+             3、根据需求定义变量。
+     */
+        /*.1s:
+            .1-有效数字的位数是1位
+             s-带SI前缀的十进制符号，四舍五入为有效数字
+        */
+        var formatSum = d3.format(".1s");
+        var padding = 10;
+        //create a quantitative power scale with exponent 0.5
+        var radius = d3.scaleSqrt()
+            .range([0, 220]);
+
+        var color = d3.scaleOrdinal()
+            .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+
+        var arc = d3.arc()
+            .padRadius(50);
+
+        //generates a pie for the given array of data
+        var pie = d3.pie()
+            .sort(null)
+            .padAngle(0.02)
+            .value(function(d) { return d.population; });
+        // 读取数据，并绘制图形
+        /*function(d,i,columns):a row conversion function
+        其中：d - the current row
+             i - the index starting at zero for the first row
+             columns - the array of column names
+        */
+        d3.csv("file/data.csv", function(d, i, columns) {
+            return {
+                state: d.State,
+                //d3.sum(array,[accessor]):在计算sum之前，先运行array.map(accessor)
+                //array.map():返回一个新的数组，这个数组的每一项都是咋原始数组中的对应项上运行传入函数的结果。
+                sum: d3.sum(columns.slice(1), function(key) { return +d[key]; }),
+                ages: columns.slice(1).map(function(key) {
+                    return {
+                        age: key,
+                        population: +d[key]
+                    };
+                })
+            };
+        }, function(error, data) {
+            /*
+            此处：为什么data.columns还是原始的columns？
+             */
+            //console.log(data);
+            // console.log(data.columns);
+            if (error) throw error;
+
+            radius.domain([0, d3.max(data, function(d) { return d.sum; })]);
+
+            color.domain(data.columns.slice(1));
+            //绘制图例
+            var legend = d3.select("body").append("svg")
+                .attr("class", "legend")
+                .attr("width", 120)
+                .attr("height", (data.columns.length - 1) * 20)
+                .selectAll("g")
+                .data(data.columns.slice(1).reverse())  //array.reverse():反转数组顺序
+                .enter().append("g")
+                .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+            legend.append("rect")
+                .attr("width", 18)
+                .attr("height", 18)
+                .style("fill", color);
+
+            legend.append("text")
+                .attr("x", 24)
+                .attr("y", 9)
+                .attr("dy", ".35em")
+                .text(function(d) { return d; });
+
+            var svg = d3.select("body").selectAll(".pie")
+                .data(data.sort(function(a, b) { return b.sum - a.sum; }))  //升序排序
+                .enter().append("svg")
+                .attr("class", "pie")
+                .each(multiple)
+                .select("g");
+
+            var label = svg.append("text")
+                .attr("class", "label");
+
+            label.append("tspan")
+                .attr("class", "label-name")
+                .attr("x", 0)
+                .attr("dy", "-.2em")
+                .text(function(d) { return d.state; });
+
+            label.append("tspan")
+                .attr("class", "label-value")
+                .attr("x", 0)
+                .attr("dy", "1.1em")
+                .text(function(d) { return formatSum(d.sum); });
+
+            function multiple(d) {
+                var r = radius(d.sum);
+
+                var svg = d3.select(this)
+                    .attr("width", r * 2)
+                    .attr("height", r * 2)
+                    .append("g")
+                    .attr("transform", "translate(" + r + "," + r + ")");
+
+                svg.selectAll(".arc")
+                    .data(function(d) { return pie(d.ages); })
+                    .enter().append("path")
+                    .attr("class", "arc")
+                    .attr("d", arc.outerRadius(r).innerRadius(r * 0.6))
+                    .style("fill", function(d) { return color(d.data.age); });
+            }
+        });
+
+    </script>
+</body>
+</html>

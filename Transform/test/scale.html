@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scale</title>
+    <style>
+        svg
+        {
+            border: 2px solid red;
+        }
+    </style>
+</head>
+<body>
+<svg style="height: 500px; width: 800px;">
+    <rect x="20" y="20" height="60" width="100"></rect>
+    <!--scale(<x>[<y>]):This transform definition specifies a scale operation by x and y. This is equivalent to matrix(x 0 0 y 0 0).If y is not provided, it is assumed to be equal to x.-->
+    <rect x="20" y="20" height="60" width="100" transform="scale(3,3)"></rect>
+</svg>
+</body>
+</html>

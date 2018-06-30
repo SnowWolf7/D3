@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Bubble Menu/Bubble Menu.iml" filepath="$PROJECT_DIR$/Bubble Menu/Bubble Menu.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Canvas Line/Canvas Line.iml" filepath="$PROJECT_DIR$/Canvas Line/Canvas Line.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Chord/Chord.iml" filepath="$PROJECT_DIR$/Chord/Chord.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Component/Component.iml" filepath="$PROJECT_DIR$/Component/Component.iml" />
+      <module fileurl="file://$PROJECT_DIR$/D3.iml" filepath="$PROJECT_DIR$/D3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Force/Force.iml" filepath="$PROJECT_DIR$/Force/Force.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Hierarchy/Hierarchy.iml" filepath="$PROJECT_DIR$/Hierarchy/Hierarchy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Quadtree/Quadtree.iml" filepath="$PROJECT_DIR$/Quadtree/Quadtree.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Sized Donut Multiples/Sized Donut Multiples.iml" filepath="$PROJECT_DIR$/Sized Donut Multiples/Sized Donut Multiples.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Test/Test.iml" filepath="$PROJECT_DIR$/Test/Test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Transform/Transform.iml" filepath="$PROJECT_DIR$/Transform/Transform.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Voronoi/Voronoi.iml" filepath="$PROJECT_DIR$/Voronoi/Voronoi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Zoom/Zoom.iml" filepath="$PROJECT_DIR$/Zoom/Zoom.iml" />
+    </modules>
+  </component>
+</project>

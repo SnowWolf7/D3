@@ -1,0 +1,48 @@
+<!--测试D3、CSS、SVG的transform-->
+<!--利用svg中矩形和普通HTML元素div做transform测试。-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rotate</title>
+    <style>
+        svg
+        {
+            border:2px solid red;
+        }
+        div
+        {
+            position: absolute;
+            left: 30px;
+            top: 30px;
+            width: 100px;
+            height: 60px;
+            background-color: blue;
+            -webkit-transform: rotate(20deg);
+            -moz-transform: rotate(20deg);
+            -ms-transform: rotate(20deg);
+            -o-transform: rotate(20deg);
+            transform: rotate(20deg);
+        }
+        #rect1
+        {
+            -webkit-transform: rotate(20deg);
+            -moz-transform: rotate(20deg);
+            -ms-transform: rotate(20deg);
+            -o-transform: rotate(20deg);
+            transform: rotate(20deg);
+        }
+    </style>
+</head>
+<body>
+<!--css3的transform属性对普通HTML元素进行变换的时候，坐标原点（0,0）默认是元素的中心；旋转之后出现明显的差异，因为div以自身中心为原点旋转，而svg元素是围绕它所在的当前用户坐标系原点旋转。-->
+<!--css3的transform和SVG元素的transform属性对SVG元素进行变换的时候，原点是当前所在用户坐标系的原点，而不是元素的中心。-->
+<div></div>
+<svg style="height: 500px;width: 800px;">
+    <rect x="20" y="20" height="60" width="100" transform="rotate(20)" style="fill: blue"></rect>
+    <rect x="20" y="20" height="60" width="100" id="rect1">
+    <!--rotate(<a>[<x><y>])represents the equivalent of the following transform definitions list: translate(<x>, <y>) rotate(<a>) translate(-<x>, -<y>).-->
+    <rect x="20" y="20" height="60" width="100" transform="rotate(20 100 100)"></rect>
+</svg>
+</body>
+</html>
